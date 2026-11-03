@@ -3,7 +3,7 @@ name: Publicar ENGINE 3D
 
 on:
   push:
-    branches: [main]
+    branches: [principal]
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
       - name: Preparar site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "enger 3D"
+          path: "enger3d"
 
       - name: Publicar site
         id: deployment
