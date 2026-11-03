@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENGINE 3D — Enciclopédia Interativa de Motores Automotivos</title>
+  <meta name="description" content="Enciclopédia interativa 3D de motores automotivos: em linha, V, Boxer, W, rotativo Wankel, Diesel e Flex." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Three.js via CDN import map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#hero" class="logo">
+      <span class="logo-mark">⚙</span>
+      <span class="logo-text">ENGINE<span class="accent">3D</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <ul class="nav-list">
+        <li><a href="#intro">Introdução</a></li>
+        <li><a href="#inline">Em Linha</a></li>
+        <li><a href="#v-engines">Motor V</a></li>
+        <li><a href="#boxer">Boxer</a></li>
+        <li><a href="#w-engine">Motor W</a></li>
+        <li><a href="#rotary">Rotativo</a></li>
+        <li><a href="#diesel">Diesel</a></li>
+        <li><a href="#flex">Flex</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="hero" class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <h1 class="hero-title">ENGINE <span class="accent">3D</span></h1>
+      <p class="hero-subtitle">Explore a engenharia por trás dos motores.</p>
+      <p class="hero-desc">
+        Uma enciclopédia interativa onde você pode girar, aproximar e observar
+        o funcionamento interno real de cada arquitetura de motor automotivo —
+        em modelos tridimensionais renderizados em tempo real.
+      </p>
+      <a href="#intro" class="btn btn-primary" data-scroll>Explorar motores ↓</a>
+    </div>
+    <div class="hero-canvas-wrap">
+      <div id="hero-canvas" class="canvas-3d" aria-label="Animação 3D de motor em funcionamento"></div>
+      <div class="canvas-hint">Arraste para girar • Role para zoom</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTRODUÇÃO ================= -->
+<section id="intro" class="section">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Fundamentos</span>
+      <h2>Motores de Combustão Interna</h2>
+      <p class="section-lead">
+        Um motor de combustão interna transforma energia química do combustível
+        em energia mecânica através da queima controlada dentro de câmaras fechadas
+        chamadas cilindros. O ciclo mais comum em automóveis é o <strong>Otto</strong>
+        (4 tempos), também aplicado ao ciclo <strong>Diesel</strong>, onde a ignição
+        ocorre por compressão, sem velas.
+      </p>
+    </header>
+
+    <div class="info-grid">
+      <article class="info-card">
+        <h3>Os 4 Tempos</h3>
+        <ol class="cycle-list">
+          <li><strong>Admissão:</strong> válvula de admissão aberta, pistão desce, mistura entra.</li>
+          <li><strong>Compressão:</strong> válvulas fechadas, pistão sobe, mistura é comprimida.</li>
+          <li><strong>Combustão:</strong> vela (ou compressão no Diesel) inflama a mistura.</li>
+          <li><strong>Escape:</strong> válvula de escape aberta, gases são expelidos.</li>
+        </ol>
+      </article>
+      <article class="info-card">
+        <h3>Classificação por Arquitetura</h3>
+        <p>
+          Os motores se diferenciam pela <em>disposição dos cilindros</em> (em linha,
+          em V, Boxer, em W), pelo <em>tipo de ignição</em> (Otto × Diesel) e por
+          <em>soluções alternativas</em> (rotativo Wankel). Cada arranjo tem
+          implicações em vibração, tamanho, custo, potência e refrigeração.
+        </p>
+      </article>
+      <article class="info-card">
+        <h3>O que você vai explorar</h3>
+        <ul class="chip-list">
+          <li>Em Linha — L3, L4, L6</li>
+          <li>Em V — V6, V8, V10, V12</li>
+          <li>Boxer — cilindros opostos</li>
+          <li>Em W — 4 bancadas</li>
+          <li>Rotativo — Wankel</li>
+          <li>Diesel — ignição por compressão</li>
+          <li>Flex — gasolina e etanol</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MOTORES EM LINHA ================= -->
+<section id="inline" class="section section-engine">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Arquitetura 01</span>
+      <h2>Motores em Linha</h2>
+      <p class="section-lead">Cilindros alinhados verticalmente, um após o outro.</p>
+    </header>
+
+    <div class="engine-block" data-engine="L3">
+      <div class="engine-canvas" id="canvas-L3"></div>
+      <div class="engine-controls" data-target="L3"></div>
+      <div class="engine-info">
+        <h3>L3 — 3 cilindros em linha</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Motor com 3 cilindros dispostos em linha, compacto e leve, usado em carros urbanos e motocicletas de média cilindrada.</dd>
+          <dt>Como funciona?</dt><dd>Os 3 pistões sobem e descem alternadamente acionando um único virabrequim, com ciclos defasados para suavidade.</dd>
+          <dt>Características</dt><dd>Bloco curto, baixa massa, excelente eficiência térmica em baixa carga; naturalmente desbalanceado (exige contrapesos).</dd>
+          <dt>Vantagens</dt><dd>Economia, peso reduzido, baixo atrito.</dd>
+          <dt>Desvantagens</dt><dd>Vibração mais perceptível; menos suave em alta rotação.</dd>
+          <dt>Onde é usado</dt><dd>Carros compactos (ex.: Fiat Firefly 1.0, Ford EcoBoost 1.0), motos.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="engine-block" data-engine="L4">
+      <div class="engine-canvas" id="canvas-L4"></div>
+      <div class="engine-controls" data-target="L4"></div>
+      <div class="engine-info">
+        <h3>L4 — 4 cilindros em linha</h3>
+        <dl>
+          <dt>O que é?</dt><dd>A arquitetura mais difundida em automóveis de passeio no mundo.</dd>
+          <dt>Como funciona?</dt><dd>Quatro pistões defasados em 180° no ciclo, equilibrando forças de 1ª e 2ª ordem.</dd>
+          <dt>Características</dt><dd>Bom equilíbrio entre potência, consumo, custo e compactação.</dd>
+          <dt>Vantagens</dt><dd>Simplicidade, custo de produção baixo, boa disponibilidade de peças.</dd>
+          <dt>Desvantagens</dt><dd>Vibrações de 2ª ordem em alta rotação; limite prático de deslocamento.</dd>
+          <dt>Onde é usado</dt><dd>Praticamente todos os carros de passeio populares e médios.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="engine-block" data-engine="L6">
+      <div class="engine-canvas" id="canvas-L6"></div>
+      <div class="engine-controls" data-target="L6"></div>
+      <div class="engine-info">
+        <h3>L6 — 6 cilindros em linha</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Seis cilindros em linha, tradicional em marcas premium e motores de alto desempenho.</dd>
+          <dt>Como funciona?</dt><dd>Ciclos defasados em 120° proporcionam equilíbrio primário e secundário perfeito.</dd>
+          <dt>Características</dt><dd>Grande suavidade, torque linear, som característico.</dd>
+          <dt>Vantagens</dt><dd>Equilíbrio natural, robustez, resposta suave.</dd>
+          <dt>Desvantagens</dt><dd>Comprimento elevado; difícil instalação transversal.</dd>
+          <dt>Onde é usado</dt><dd>BMW, Toyota Supra, Mercedes antigos, caminhões leves.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MOTORES EM V ================= -->
+<section id="v-engines" class="section section-engine">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Arquitetura 02</span>
+      <h2>Motores em V</h2>
+      <p class="section-lead">Duas bancadas de cilindros inclinadas formando um "V", compartilhando um virabrequim.</p>
+    </header>
+
+    <div class="engine-block" data-engine="V6">
+      <div class="engine-canvas" id="canvas-V6"></div>
+      <div class="engine-controls" data-target="V6"></div>
+      <div class="engine-info">
+        <h3>V6 — 6 cilindros em V</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Duas bancadas de 3 cilindros em V (60° ou 90°).</dd>
+          <dt>Como funciona?</dt><dd>Cada bancada possui seu próprio comando; os pistões compartilham o virabrequim em ângulos defasados.</dd>
+          <dt>Características</dt><dd>Compacto em comprimento, bom para instalação transversal.</dd>
+          <dt>Vantagens</dt><dd>Economia de espaço, suavidade razoável, ampla faixa de uso.</dd>
+          <dt>Desvantagens</dt><dd>Mais complexo e caro que o L4; pior acesso para manutenção.</dd>
+          <dt>Onde é usado</dt><dd>SUVs, sedãs médios, picapes (ex.: Ford Ranger V6, Honda Accord V6).</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="engine-block" data-engine="V8">
+      <div class="engine-canvas" id="canvas-V8"></div>
+      <div class="engine-controls" data-target="V8"></div>
+      <div class="engine-info">
+        <h3>V8 — 8 cilindros em V</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Duas bancadas de 4 cilindros, tipicamente em 90°.</dd>
+          <dt>Como funciona?</dt><dd>Alternância entre bancadas suaviza a entrega de potência; amplamente usado em motores "small block".</dd>
+          <dt>Características</dt><dd>Torque elevado em baixa, som grave, robustez.</dd>
+          <dt>Vantagens</dt><dd>Grande potência e torque, durabilidade, arquitetura consagrada.</dd>
+          <dt>Desvantagens</dt><dd>Consumo elevado, peso, dimensões.</dd>
+          <dt>Onde é usado</dt><dd>Muscle cars, picapes (F-150 V8), esportivos americanos.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="engine-block" data-engine="V10">
+      <div class="engine-canvas" id="canvas-V10"></div>
+      <div class="engine-controls" data-target="V10"></div>
+      <div class="engine-info">
+        <h3>V10 — 10 cilindros em V</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Cinco cilindros por bancada, geralmente em 72°–90°.</dd>
+          <dt>Como funciona?</dt><dd>Ciclos muito próximos produzem entrega extremamente linear e sonoridade aguda.</dd>
+          <dt>Características</dt><dd>Alta rotação, resposta rápida.</dd>
+          <dt>Vantagens</dt><dd>Potência específica alta, som icônico.</dd>
+          <dt>Desvantagens</dt><dd>Complexidade, custo, consumo.</dd>
+          <dt>Onde é usado</dt><dd>Lamborghini Huracán, Audi R8, Dodge Viper, BMW M5 (E60).</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="engine-block" data-engine="V12">
+      <div class="engine-canvas" id="canvas-V12"></div>
+      <div class="engine-controls" data-target="V12"></div>
+      <div class="engine-info">
+        <h3>V12 — 12 cilindros em V</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Seis cilindros por bancada, normalmente em 60°.</dd>
+          <dt>Como funciona?</dt><dd>Equilíbrio mecânico praticamente perfeito, entrega contínua de potência.</dd>
+          <dt>Características</dt><dd>Refinamento máximo, alta potência, som inconfundível.</dd>
+          <dt>Vantagens</dt><dd>Suavidade absoluta, desempenho excepcional.</dd>
+          <dt>Desvantagens</dt><dd>Custo altíssimo, peso, complexidade.</dd>
+          <dt>Onde é usado</dt><dd>Ferrari, Lamborghini Aventador, Aston Martin, Mercedes AMG.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOXER ================= -->
+<section id="boxer" class="section section-engine">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Arquitetura 03</span>
+      <h2>Motor Boxer</h2>
+      <p class="section-lead">Cilindros horizontalmente opostos, com pistões trabalhando em sentidos contrários.</p>
+    </header>
+
+    <div class="engine-block" data-engine="BOXER">
+      <div class="engine-canvas" id="canvas-BOXER"></div>
+      <div class="engine-controls" data-target="BOXER"></div>
+      <div class="engine-info">
+        <h3>Boxer — cilindros opostos</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Motores com cilindros dispostos em pares opostos horizontais, compartilhando um virabrequim central.</dd>
+          <dt>Como funciona?</dt><dd>Os pistões de cada par se movem simultaneamente em direções opostas, cancelando forças laterais e vibrações primárias.</dd>
+          <dt>Características</dt><dd>Centro de gravidade baixo, formato achatado, som característico.</dd>
+          <dt>Vantagens</dt><dd>Equilíbrio natural, baixo centro de gravidade, refrigeração eficiente.</dd>
+          <dt>Desvantagens</dt><dd>Largura elevada, manutenção complexa, custo de produção maior.</dd>
+          <dt>Onde é usado</dt><dd>Subaru (Impreza, WRX), Porsche 911, motos BMW.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MOTOR W ================= -->
+<section id="w-engine" class="section section-engine">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Arquitetura 04</span>
+      <h2>Motor em W</h2>
+      <p class="section-lead">Quatro bancadas de cilindros em duas fileiras de "V", formando um "W" quando visto de frente.</p>
+    </header>
+
+    <div class="engine-block" data-engine="W">
+      <div class="engine-canvas" id="canvas-W"></div>
+      <div class="engine-controls" data-target="W"></div>
+      <div class="engine-info">
+        <h3>W — quatro bancadas</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Arquitetura compacta com duas fileiras de cilindros em "V" sobrepostas, formando um W. Famosa nos motores W8, W12 e W16 do Grupo Volkswagen.</dd>
+          <dt>Como funciona?</dt><dd>Cada fileira tem seu próprio comando de válvulas; quatro bancadas compartilham um único virabrequim, com cilindros muito próximos.</dd>
+          <dt>Características</dt><dd>Muito compacto em comprimento, alta densidade de cilindros.</dd>
+          <dt>Vantagens</dt><dd>Grande potência em espaço reduzido, viável para tração integral.</dd>
+          <dt>Desvantagens</dt><dd>Complexidade extrema, refrigeração difícil, custo altíssimo.</dd>
+          <dt>Onde é usado</dt><dd>Bugatti Veyron (W16), Bentley W12, Volkswagen W8.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROTATIVO ================= -->
+<section id="rotary" class="section section-engine">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Arquitetura 05</span>
+      <h2>Motor Rotativo Wankel</h2>
+      <p class="section-lead">Sem pistões alternativos: um rotor triangular gira dentro de uma câmara epitrocoidal.</p>
+    </header>
+
+    <div class="engine-block" data-engine="ROTARY">
+      <div class="engine-canvas" id="canvas-ROTARY"></div>
+      <div class="engine-controls" data-target="ROTARY"></div>
+      <div class="engine-info">
+        <h3>Rotativo Wankel</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Motor de combustão interna que usa um rotor triangular em vez de pistões, criando três câmaras de volume variável.</dd>
+          <dt>Como funciona?</dt><dd>O rotor gira em torno de um eixo excêntrico; cada face do triângulo passa por admissão, compressão, combustão e escape em sequência contínua.</dd>
+          <dt>Características</dt><dd>Poucas peças móveis, rotação altíssima, entrega suave.</dd>
+          <dt>Vantagens</dt><dd>Compacto, leve, potência específica alta, funcionamento suave.</dd>
+          <dt>Desvantagens</dt><dd>Consumo e emissões elevados, desgaste das vedações do rotor.</dd>
+          <dt>Onde é usado</dt><dd>Mazda RX-7, RX-8; historicamente NSU Ro 80.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIESEL ================= -->
+<section id="diesel" class="section section-engine">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Arquitetura 06</span>
+      <h2>Motor Diesel</h2>
+      <p class="section-lead">Ignição por compressão: o combustível é injetado e inflama sozinho no ar comprimido.</p>
+    </header>
+
+    <div class="engine-block" data-engine="DIESEL">
+      <div class="engine-canvas" id="canvas-DIESEL"></div>
+      <div class="engine-controls" data-target="DIESEL"></div>
+      <div class="engine-info">
+        <h3>Diesel — ignição por compressão</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Motor que queima óleo diesel sem vela: a alta compressão aquece o ar, e o combustível injetado inflama espontaneamente.</dd>
+          <dt>Como funciona?</dt><dd>Admissão de ar puro → compressão severa (~20:1) → injeção de diesel → combustão → escape.</dd>
+          <dt>Características</dt><dd>Torque elevado em baixa rotação, alta eficiência térmica.</dd>
+          <dt>Vantagens</dt><dd>Consumo baixo, durabilidade, força para carga.</dd>
+          <dt>Desvantagens</dt><dd>Ruído, emissões de NOx/partículas, peso.</dd>
+          <dt>Onde é usado</dt><dd>Caminhões, picapes, SUVs, utilitários e carros de passeio europeus.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FLEX ================= -->
+<section id="flex" class="section section-engine">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Arquitetura 07</span>
+      <h2>Motor Flex</h2>
+      <p class="section-lead">Projetado para operar com gasolina, etanol ou qualquer mistura entre eles.</p>
+    </header>
+
+    <div class="engine-block" data-engine="FLEX">
+      <div class="engine-canvas" id="canvas-FLEX"></div>
+      <div class="engine-controls" data-target="FLEX"></div>
+      <div class="engine-info">
+        <h3>Flex — bicombustível</h3>
+        <dl>
+          <dt>O que é?</dt><dd>Motor Otto adaptado para reconhecer e queimar etanol hidratado, gasolina ou misturas, ajustando parâmetros em tempo real.</dd>
+          <dt>Como funciona?</dt><dd>Sensores medem a proporção de etanol; a central eletrônica ajusta injeção, ignição e lambda.</dd>
+          <dt>Características</dt><dd>Injeção eletrônica flexível, materiais resistentes à corrosão do etanol.</dd>
+          <dt>Vantagens</dt><dd>Liberdade de abastecimento, melhor desempenho com etanol.</dd>
+          <dt>Desvantagens</dt><dd>Consumo maior no etanol, sistemas mais complexos.</dd>
+          <dt>Onde é usado</dt><dd>Mercado brasileiro (VW, Fiat, GM, Ford, Toyota), comuns em carros de passeio.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="logo-text footer-logo">ENGINE<span class="accent">3D</span></p>
+      <p>Enciclopédia interativa de motores automotivos.</p>
+    </div>
+    <div>
+      <p><strong>Stack:</strong> HTML5 · CSS3 · JavaScript · Three.js · WebGL</p>
+      <p>Projeto educacional — modelos construídos proceduralmente.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
