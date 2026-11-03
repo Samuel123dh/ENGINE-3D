@@ -3,14 +3,22 @@
 // Inicialização do site, navegação, scroll suave, reveal on scroll
 // ============================================================
 
-import { initAllMotors } from './motors.js';
+import { initAllMotors } from './motores.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   setupSmoothScroll();
   setupMobileNav();
   setupRevealOnScroll();
   setupHeaderShrink();
-  initAllMotors();
+
+  // Pequeno delay para garantir que o layout calculou os tamanhos
+  setTimeout(() => {
+    try {
+      initAllMotors();
+    } catch (err) {
+      console.error('[ENGINE 3D] Falha ao inicializar motores:', err);
+    }
+  }, 100);
 });
 
 /* ---------- Scroll suave para âncoras ---------- */
@@ -25,8 +33,6 @@ function setupSmoothScroll() {
       const headerH = document.querySelector('.site-header')?.offsetHeight || 0;
       const top = target.getBoundingClientRect().top + window.scrollY - headerH - 12;
       window.scrollTo({ top, behavior: 'smooth' });
-
-      // fecha menu mobile se estiver aberto
       document.querySelector('.nav-list')?.classList.remove('open');
     });
   });
@@ -59,12 +65,12 @@ function setupRevealOnScroll() {
         }
       });
     },
-    { threshold: 0.12 }
+    { threshold: 0.08 }
   );
   targets.forEach((el) => obs.observe(el));
 }
 
-/* ---------- Header shrink ---------- */
+/* ---------- Header shadow ---------- */
 function setupHeaderShrink() {
   const header = document.querySelector('.site-header');
   if (!header) return;
